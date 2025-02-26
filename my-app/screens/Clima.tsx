@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import axios from 'axios';
 
-// Obtenemos el ancho de la pantalla para hacerlo responsivo
 const screenWidth = Dimensions.get('window').width;
 
 type Pronostico = {
@@ -14,21 +13,19 @@ type Pronostico = {
             text: string;
             icon: string;
         };
-        daily_chance_of_rain: number; // Probabilidad de lluvia
+        daily_chance_of_rain: number;
     };
 };
 
-// Función para obtener el color de fondo según la temperatura máxima
 const getBackgroundColor = (temp: number) => {
     if (temp < 20) return '#2E86C1'; // Azul
     if (temp >= 21 && temp <= 30) return '#F4C542'; // Amarillo
     return '#F39C12'; // Naranja
 };
 
-// Función para obtener el día de la semana
 const getDayOfWeek = (date: string) => {
     const day = new Date(date).toLocaleString('es-ES', { weekday: 'long' });
-    return day.charAt(0).toUpperCase() + day.slice(1); // Capitalizar la primera letra
+    return day.charAt(0).toUpperCase() + day.slice(1);
 };
 
 const WeatherPronostico = () => {
@@ -94,8 +91,8 @@ const WeatherPronostico = () => {
                     data={pronosticoData}
                     renderItem={({ item }) => <ForecastItem forecast={item} />}
                     keyExtractor={(item) => item.date}
-                    horizontal={false}  // Esto hace que el FlatList sea vertical (por defecto)
-                    showsVerticalScrollIndicator={false} // Opcional: Ocultar el indicador de desplazamiento vertical
+                    horizontal={false} 
+                    showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.scrollContainer}
                 />
             )}
@@ -110,7 +107,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2C2C2C', // Fondo gris oscuro
+        backgroundColor: '#2C2C2C', 
     },
     loadingContainer: {
         flex: 1,
@@ -123,11 +120,11 @@ const styles = StyleSheet.create({
     itemContainer: {
         borderRadius: 10,
         padding: 15,
-        marginVertical: 10, // Asegúrate de tener suficiente espacio entre los elementos
+        marginVertical: 10, 
         alignItems: 'center',
         justifyContent: 'center',
-        width: screenWidth * 0.85, // Ancho adaptativo al 85% de la pantalla
-        minHeight: 150, // Altura mínima para las tarjetas (ajústalo según el contenido)
+        width: screenWidth * 0.85, 
+        minHeight: 150, 
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
